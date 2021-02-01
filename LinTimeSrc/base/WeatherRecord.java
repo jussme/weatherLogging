@@ -1,49 +1,42 @@
 package base;
 
-import java.lang.Comparable;
-import java.lang.ClassCastException;
-import java.text.DecimalFormat;
-
-public class WeatherRecord implements Comparable{
-	private final float press;
-		public float getPress() {return press;}
-	private final float temp;
-		public float getTemp() {return temp;}
-	private final float hum;
-		public float getHum() {return hum;}
+public class WeatherRecord implements Comparable<WeatherRecord>{
+	private float[] dataArray;
+		public float[] getDataArray() {
+			return this.dataArray;
+		}
 	private final long obTime;
-		public long getObTime() {return obTime;}
-	private final String source;
-		public String getSource() {return source;}
+		public long getObTime() {
+			return this.obTime;
+		}
 	
-	public WeatherRecord(float press, float temp, float hum, long obTime) {
-		this.press = press;
-		this.temp = temp;
-		this.hum = hum;
-		this.obTime = obTime;
-		this.source = "";
+	public WeatherRecord(double[] propertiesPlusObTime) {
+		dataArray = new float[propertiesPlusObTime.length - 1];
+		for(int it = 0; it < dataArray.length; ++it) {
+			dataArray[it] = (float) propertiesPlusObTime[it];
+		}
+		obTime = (long) propertiesPlusObTime[propertiesPlusObTime.length - 1];
 	}
 	
-	public WeatherRecord(float press, float temp, float hum, long obTime, String source) {
-		this.press = press;
-		this.temp = temp;
-		this.hum = hum;
+	public WeatherRecord(float[] properties, long obTime) {
 		this.obTime = obTime;
-		this.source = source;
+		this.dataArray = properties;
 	}
 	
 	public boolean equals(WeatherRecord record) {
-		if (this.press == record.press &&
-			this.temp == record.temp &&
-			this.hum == record.hum &&
-			this.obTime == record.obTime)
-			return true;
-			
-		return false;
+		for(int it = 0; it < this.dataArray.length; ++it) {
+			if(this.dataArray[it] != record.dataArray[it])
+				return false;
+		}
+		
+		if(this.obTime != record.obTime)
+			return false;
+		
+		return true;
 	}
 	
 	@Override
-	public int compareTo(Object record) {
+	public int compareTo(WeatherRecord record) {
 		WeatherRecord recordThrown = (WeatherRecord) record;
 		
 		if(this.obTime < recordThrown.obTime)
@@ -55,15 +48,17 @@ public class WeatherRecord implements Comparable{
 				return 0;
 	}
 	
+	@Override
 	public String toString() {
-		//formatters
-		DecimalFormat formattingObjectForPress = new DecimalFormat("###.#");
-		DecimalFormat formattingObjectForTemp = new DecimalFormat("##.#");
-		DecimalFormat formattingObjectForHum = new DecimalFormat("###");
-		
-		return formattingObjectForPress.format(press) + "\t" +
-			formattingObjectForTemp.format(temp) + "\t" +
-			formattingObjectForHum.format(hum) + "\t" +
-			obTime + "\r\n";
+		StringBuilder stringBuilder = new StringBuilder();
+		for(float property : this.dataArray) {
+			if(!(property != property))
+				stringBuilder.append(
+						Math.round(property * 10)/10f + "\t"
+				);
+			else
+				stringBuilder.append("NaN\t");
+		}
+		return stringBuilder.toString() + obTime; 
 	}
 }

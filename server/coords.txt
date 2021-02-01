@@ -1,2 +1,2 @@
-longitude(dlugosc): desiredLonAsThreeDecimalPlacesFloat
-latitude(szerokosc): desiredLatAsThreeDecimalPlacesFloat
+lon <lon3decimalPlacesOfPrecision>
+lat <lat3decimalPlacesOfPrecision>

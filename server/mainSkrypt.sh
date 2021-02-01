@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
-#let it=144
-#CRNT=''
+
+lastPID=1
 
 exitFunction() {
-        while [ $(lsof | grep log.txt)!=0 ]; do
-		sleep 2s
-		echo -e '\e[1mLOOPING\e[0m'
-	done
-        echo -e "\e[1mExiting api script\e[0m"
-        exit 0
+        while [[ "$(ps -e | grep "${lastPID}")" =~ '^(\d+)\ .+\ (\w+)$' ]]; do
+			if [[ "${BASH_REMATCH[2]}" != 'python' ]]; then
+				echo -e "\e[1m~\nExiting api script\e[0m"
+				exit 0
+			fi
+			
+			echo -e '\e[1m\nWaiting for curl...\e[0m'
+			sleep 2s
+		done
+		
+		echo -e "\e[1m\nExiting weather script\e[0m"
+		exit 0
 }
 
 trap 'exitFunction' SIGINT
 
 while :
 do
-	./skrypt.sh
-	#CRNT=$!
+	./skrypt.py &
+	lastPID="$!"
 	echo $(date)
 	sleep 10m
-	#let --it
 done
