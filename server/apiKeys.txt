@@ -1,0 +1,2 @@
+weatherbit.io apiKey
+openweathermap.org apiKey

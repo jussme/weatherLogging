@@ -1,0 +1,2 @@
+longitude(dlugosc): desiredLonAsThreeDecimalPlacesFloat
+latitude(szerokosc): desiredLatAsThreeDecimalPlacesFloat
