@@ -1,2 +1,0 @@
-lon <lon3decimalPlacesOfPrecision>
-lat <lat3decimalPlacesOfPrecision>

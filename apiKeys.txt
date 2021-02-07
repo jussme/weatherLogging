@@ -1,2 +1,0 @@
-weatherbit.io http://api.weatherbit.io/v2.0/current?lat=LAT&lon=LON&key=APIKEY <apiKey> pressure "pres":([0-9.]+) temperature "temp":([0-9.-]+) relativeHumidity "rh":([0-9.]+) unixTime "ts":([0-9.]+)
-openweathermap.org https://api.openweathermap.org/data/2.5/weather?lat=LAT&lon=LON&appid=APIKEY <apiKey> pressure "pressure":([0-9.]+) temperature "temp":([0-9.-]+) humidity "humidity":([0-9.]+) unixTime "dt":([0-9.]+)
