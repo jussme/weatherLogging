@@ -1,0 +1,5 @@
+<nameOfApi> <urlendpoint?lat=LAT&lon=LON&api=APIKEY> <apiKey> <<property_ie.'Temperature'>\t<regexForExtractingFromResponse>> ...
+.
+.
+.
+
