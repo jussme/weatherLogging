@@ -59,7 +59,7 @@ for api in apiList:
         print('Server request failed');
         exit(1);
     
-    #creating one line of data
+    #creating one line of data/one api's response
     dataLine = '';
     for dataRegexPair in api.dataRegexPairs:
         regex = dataRegexPair[1];
