@@ -23,6 +23,6 @@ while :
 do
 	./skrypt.py &
 	lastPID="$!"
-	echo -e "$(date)~~~~\n"
+	echo -e "$(date)~~~\n"
 	sleep 10m
 done
